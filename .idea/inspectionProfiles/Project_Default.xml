@@ -1,0 +1,20 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="config.new_dialog_timeout" />
+          <option value="config.use_chatgpt_api" />
+          <option value="config.telegram_token" />
+          <option value="config.allowed_telegram_usernames" />
+          <option value="config.chatgpt_price_per_1000_tokens" />
+          <option value="config.whisper_price_per_1_min" />
+          <option value="config.gpt_price_per_1000_tokens" />
+          <option value="config.provider_token" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
