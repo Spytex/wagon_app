@@ -1,14 +1,6 @@
-import Home from "@/components/screens/home/Home";
+import Photos from "@/components/screens/photos/Photos";
 
 
 export default function HomePage() {
-  return (
-      <div>
-          <Home/>
-          123
-          3232
-          32
-      </div>
-
-  )
+  return <Photos/>
 }

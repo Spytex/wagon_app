@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import Layout from "@/components/layout/Layout";
 
-const Home: FC = () => {
+const Photos: FC = () => {
   return (
     <Layout>
-        123
+        323232
+          323
+          3232
     </Layout>
   )
 }
 
-export default Home;
+export default Photos;
