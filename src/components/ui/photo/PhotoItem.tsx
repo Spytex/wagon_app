@@ -1,5 +1,5 @@
 import { FC } from "react";
-import {Box, Button, Flex, Icon, IconButton, Image, Text} from "@chakra-ui/react";
+import {Box, Flex, IconButton, Image, Text} from "@chakra-ui/react";
 import { IPhotoSingle } from "@/interfaces/photo.interface";
 import { PhotoService } from "@/service/photo.service";
 import { DeleteIcon } from "@chakra-ui/icons";

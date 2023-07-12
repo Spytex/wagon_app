@@ -50,7 +50,6 @@ const handler: NextApiHandler = async (req, res) => {
     } catch (error) {
       res.status(500).json({message: error});
     }
-    res.json({done: "ok"});
   } else if (method === "POST") {
     try {
       await fs.readdir(path.join(process.cwd() + "/public", "/photos"));
