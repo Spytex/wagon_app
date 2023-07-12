@@ -58,6 +58,8 @@ const handler: NextApiHandler = async (req, res) => {
     }
     await readFile(req, true);
     res.json({done: "ok"});
+  } else {
+    res.status(405).json({ message: "Method not supported" });
   }
 };
 
