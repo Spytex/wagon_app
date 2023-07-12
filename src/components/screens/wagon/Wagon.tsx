@@ -6,7 +6,7 @@ import {WagonItemSingle} from "@/components/ui/wagon/WagonItemSingle";
 const Wagon: FC<IWagonDataSingle> = ({Vagons}) => {
   return (
     <Layout>
-      <WagonItemSingle Vagons={Vagons}/>
+      <WagonItemSingle Vagons={Vagons} />
     </Layout>
   )
 }

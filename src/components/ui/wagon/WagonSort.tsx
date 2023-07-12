@@ -56,6 +56,3 @@ const WagonSort: FC<IWagonSort> = ({
 };
 
 export default WagonSort;
-
-
-
