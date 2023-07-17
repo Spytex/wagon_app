@@ -20,9 +20,9 @@ describe('Layout', () => {
   });
 
   it('should toggle color mode when color mode button is clicked', () => {
-    cy.get('.chakra-stack > .chakra-button').click();
+    cy.get('.css-70qvj9 > .chakra-stack > .chakra-button').click();
     cy.get('html').should('have.attr', 'data-theme', 'dark');
-    cy.get('.chakra-stack > .chakra-button').click();
+    cy.get('.css-70qvj9 > .chakra-stack > .chakra-button').click();
     cy.get('html').should('have.attr', 'data-theme', 'light');
   });
 });
