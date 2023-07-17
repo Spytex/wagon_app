@@ -45,8 +45,6 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
     }
   };
 
-  const paddedVagonNumber = Vagons.VagonNumber.toString().padStart(12, "0");
-
   const handleShowQRCode = () => {
     setShowQRCode(!showQRCode);
     setShowBarcode(false);
@@ -94,12 +92,12 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
       </Flex>
       {showQRCode && (
         <Center mt={4}>
-          <QRCode value={JSON.stringify(Vagons)} />
+          <QRCode value={Vagons.VagonNumber} />
         </Center>
       )}
       {showBarcode && (
         <Center mt={4} textAlign="center">
-          <Barcode value={paddedVagonNumber} format="EAN13" />
+          <Barcode value={Vagons.VagonNumber.toString().padStart(12, "0")} format="EAN13" />
         </Center>
       )}
       <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleFileUpload} />
