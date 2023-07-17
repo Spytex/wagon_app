@@ -9,4 +9,8 @@ export const WagonService = {
         const {data} = await axios.get<IWagonData>('/commercialAgent/hs/CarrWorkApp/VagonInfo')
         return data
     },
+    async getOne(VagonNumber: string){
+        const {data} = await axios.get<IWagonData>('/commercialAgent/hs/CarrWorkApp/VagonInfo')
+        return data.Vagons.find((Vagons) => Vagons.VagonNumber === VagonNumber)
+    },
 }
