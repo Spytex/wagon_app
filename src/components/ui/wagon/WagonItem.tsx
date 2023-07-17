@@ -1,11 +1,15 @@
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 import { IWagonDataSingle } from "@/interfaces/wagon.interface";
-import { Box, Button, Flex, Link, Text, useToast } from "@chakra-ui/react";
-import {PhotoService} from "@/service/photo.service";
+import {Box, Button, Center, Flex, Link, Text, useToast, VStack} from "@chakra-ui/react";
+import { PhotoService } from "@/service/photo.service";
+import QRCode from "react-qr-code";
+import Barcode from "react-barcode";
 
 export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
+  const [showQRCode, setShowQRCode] = useState(false);
+  const [showBarcode, setShowBarcode] = useState(false);
 
   const handleFileInputChange = () => {
     if (fileInputRef.current) {
@@ -22,7 +26,7 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
         const response = await PhotoService.uploadPhoto(Vagons.VagonNumber, formData);
         console.log("File uploaded:", response.data);
         toast({
-          position: 'bottom-right',
+          position: "bottom-right",
           title: "File uploaded successfully.",
           status: "success",
           duration: 5000,
@@ -41,10 +45,21 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
     }
   };
 
+  const paddedVagonNumber = Vagons.VagonNumber.toString().padStart(12, "0");
+
+  const handleShowQRCode = () => {
+    setShowQRCode(!showQRCode);
+    setShowBarcode(false);
+  };
+
+  const handleShowBarcode = () => {
+    setShowBarcode(!showBarcode);
+    setShowQRCode(false);
+  };
 
   return (
     <Box borderWidth={1} p={4} borderRadius="md" w="100%">
-      <Flex align="center" justify="space-between">
+      <Flex align="center" justify="space-between" >
         <Link href={`/${Vagons.VagonNumber}`}>
           <Box>
             <Text>
@@ -64,17 +79,30 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
             </Text>
           </Box>
         </Link>
-        <Button variant="ghost" onClick={handleFileInputChange}>
-          Add Picture
-        </Button>
+        <VStack>
+          <Button variant="ghost" onClick={handleShowQRCode}>
+            {showQRCode ? 'Hide QR Code' : 'Show QR Code'}
+          </Button>
+          <Button variant="ghost" onClick={handleShowBarcode}>
+            {showBarcode ? 'Hide Barcode' : 'Show Barcode'}
+          </Button>
+          <Button variant="ghost" onClick={handleFileInputChange}>
+            Add Picture
+          </Button>
+        </VStack>
+
       </Flex>
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInputRef}
-        hidden
-        onChange={handleFileUpload}
-      />
+      {showQRCode && (
+        <Center mt={4}>
+          <QRCode value={JSON.stringify(Vagons)} />
+        </Center>
+      )}
+      {showBarcode && (
+        <Center mt={4} textAlign="center">
+          <Barcode value={paddedVagonNumber} format="EAN13" />
+        </Center>
+      )}
+      <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleFileUpload} />
     </Box>
   );
 };
