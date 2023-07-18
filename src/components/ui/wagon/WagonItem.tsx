@@ -2,7 +2,7 @@ import { FC, useRef, useState } from "react";
 import { IWagonDataSingle } from "@/interfaces/wagon.interface";
 import {Box, Button, Center, Flex, Link, Text, useToast, VStack} from "@chakra-ui/react";
 import { PhotoService } from "@/service/photo.service";
-import QRCode from "react-qr-code";
+import QRCode from "qrcode.react";
 import Barcode from "react-barcode";
 
 export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
