@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from "react";
 import { IWagonDataSingle } from "@/interfaces/wagon.interface";
-import { Box, Button, Center, Flex, Link, Text, useToast, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Link, Text, useToast, VStack, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { PhotoService } from "@/service/photo.service";
 import QRCode from "qrcode.react";
 import Barcode from "react-barcode";
@@ -10,6 +10,10 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Wagon }) => {
   const toast = useToast();
   const [showQRCode, setShowQRCode] = useState(false);
   const [showBarcode, setShowBarcode] = useState(false);
+  const { colorMode } = useColorMode();
+  const bgColor = useColorModeValue('#FFFFFF', '#1a202c');
+  const lineColor = useColorModeValue('#000000', '#FFFFFF');
+
 
   const handleFileInputChange = () => {
     if (fileInputRef.current) {
@@ -92,12 +96,12 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Wagon }) => {
       </Flex>
       {showQRCode && (
         <Center mt={4}>
-          <QRCode value={Wagon.VagonNumber} />
+          <QRCode value={Wagon.VagonNumber} bgColor={bgColor} fgColor={lineColor}/>
         </Center>
       )}
       {showBarcode && (
         <Center mt={4} textAlign="center">
-          <Barcode value={Wagon.VagonNumber.toString().padStart(12, "0")} format="EAN13" />
+          <Barcode value={Wagon.VagonNumber.toString().padStart(12, "0")} format="EAN13" background={bgColor} lineColor={lineColor} />
         </Center>
       )}
       <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleFileUpload} />

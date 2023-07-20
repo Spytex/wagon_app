@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import Layout from '@/components/layout/Layout';
-import { Box, Button, Center, Container, Divider, Flex, IconButton, Text, VStack } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons';
+import { Box, Button, Center, Container, Divider, Flex, IconButton, Input, InputGroup, InputRightAddon, Text, VStack, useClipboard } from '@chakra-ui/react';
+import { DeleteIcon, CopyIcon, CheckIcon } from '@chakra-ui/icons';
 import { KeyService } from "@/service/key.service";
 
 const Dashboard: FC = () => {
@@ -38,11 +38,11 @@ const Dashboard: FC = () => {
             <Center>
               <Button onClick={handleCreateApiKey}>Create API Key</Button>
             </Center>
-            <Divider orientation="horizontal" py={2} />
-            <VStack py={4}>
+            <Divider orientation="horizontal" py={2} ml={-4} px={4} />
+            <VStack mt={4}>
               {apiKeys.map((apiKey, index) => (
-                <Box key={index} display="flex" alignItems="center">
-                  <Text>{apiKey}</Text>
+                <Box key={index} display="flex" alignItems="center" w="100%">
+                  <InputWithClipboard apiKey={apiKey} />
                   <IconButton
                     ml={2}
                     icon={<DeleteIcon />}
@@ -58,5 +58,25 @@ const Dashboard: FC = () => {
     </Layout>
   );
 };
+
+
+const InputWithClipboard: FC<{ apiKey: string }> = ({ apiKey }) => {
+  const { onCopy, hasCopied } = useClipboard(apiKey);
+
+  return (
+    <InputGroup>
+      <Input value={apiKey} isReadOnly />
+      <InputRightAddon >
+        <IconButton
+          variant="ghost"
+          onClick={onCopy}
+          icon={hasCopied ? <CheckIcon /> : <CopyIcon />}
+          aria-label={hasCopied ? "Copied" : "Copy"}
+        />
+      </InputRightAddon>
+    </InputGroup>
+  );
+};
+
 
 export default Dashboard;
