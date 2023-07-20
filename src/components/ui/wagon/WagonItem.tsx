@@ -1,11 +1,11 @@
-import { FC, useRef, useState } from "react";
-import { IWagonDataSingle } from "@/interfaces/wagon.interface";
+import {FC, useRef, useState} from "react";
+import {IWagonDataSingle} from "@/interfaces/wagon.interface";
 import {Box, Button, Center, Flex, Link, Text, useToast, VStack} from "@chakra-ui/react";
-import { PhotoService } from "@/service/photo.service";
+import {PhotoService} from "@/service/photo.service";
 import QRCode from "qrcode.react";
 import Barcode from "react-barcode";
 
-export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
+export const WagonItem: FC<IWagonDataSingle> = ({Wagon}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
   const [showQRCode, setShowQRCode] = useState(false);
@@ -23,7 +23,7 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
       try {
         const formData = new FormData();
         formData.append("myImage", file);
-        const response = await PhotoService.uploadPhoto(Vagons.VagonNumber, formData);
+        const response = await PhotoService.uploadPhoto(Wagon.VagonNumber, formData);
         console.log("File uploaded:", response.data);
         toast({
           position: "bottom-right",
@@ -57,23 +57,23 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
 
   return (
     <Box borderWidth={1} p={4} borderRadius="md" w="100%">
-      <Flex align="center" justify="space-between" >
-        <Link href={`/${Vagons.VagonNumber}`}>
+      <Flex align="center" justify="space-between">
+        <Link href={`/${Wagon.VagonNumber}`}>
           <Box>
             <Text>
-              <strong>Vagon Number:</strong> {Vagons.VagonNumber}
+              <strong>Wagon Number:</strong> {Wagon.VagonNumber}
             </Text>
             <Text>
-              <strong>Vagon Type:</strong> {Vagons.VagonType}
+              <strong>Wagon Type:</strong> {Wagon.VagonType}
             </Text>
             <Text>
-              <strong>Cargo Name:</strong> {Vagons.CargoName}
+              <strong>Cargo Name:</strong> {Wagon.CargoName}
             </Text>
             <Text>
-              <strong>Owner Name:</strong> {Vagons.OwnerName}
+              <strong>Owner Name:</strong> {Wagon.OwnerName}
             </Text>
             <Text>
-              <strong>Departure Station:</strong> {Vagons.DepartureStationName}
+              <strong>Departure Station:</strong> {Wagon.DepartureStationName}
             </Text>
           </Box>
         </Link>
@@ -92,15 +92,15 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Vagons }) => {
       </Flex>
       {showQRCode && (
         <Center mt={4}>
-          <QRCode value={Vagons.VagonNumber} />
+          <QRCode value={Wagon.VagonNumber}/>
         </Center>
       )}
       {showBarcode && (
         <Center mt={4} textAlign="center">
-          <Barcode value={Vagons.VagonNumber.toString().padStart(12, "0")} format="EAN13" />
+          <Barcode value={Wagon.VagonNumber.toString().padStart(12, "0")} format="EAN13"/>
         </Center>
       )}
-      <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleFileUpload} />
+      <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleFileUpload}/>
     </Box>
   );
 };

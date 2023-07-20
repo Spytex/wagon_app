@@ -1,35 +1,24 @@
-import { FC, useState } from "react";
+import {FC, useState} from "react";
 import Layout from "@/components/layout/Layout";
-import { IPhoto } from "@/interfaces/photo.interface";
+import {IPhoto} from "@/interfaces/photo.interface";
 import {SimpleGrid, Button, Flex, Box} from "@chakra-ui/react";
-import { PhotoItem } from "@/components/ui/photo/PhotoItem";
-import PhotoSort  from "@/components/ui/photo/PhotoSort";
-import PhotoSearch  from "@/components/ui/wagon/WagonSearch";
+import {PhotoItem} from "@/components/ui/photo/PhotoItem";
+import PhotoSort from "@/components/ui/photo/PhotoSort";
+import PhotoSearch from "@/components/ui/wagon/WagonSearch";
 
-const Photos: FC<IPhoto> = ({ dirs }) => {
+const Photos: FC<IPhoto> = ({photoPaths}) => {
   const [sortField, setSortField] = useState<string | string[]>('VagonNumber');
   const [sortOrder, setSortOrder] = useState<string | string[]>('asc');
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [itemsPerPage, setItemsPerPage] = useState<number>(25);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handleSortFieldChange = (value: string | string[]) => {
-    setSortField(value);
-  };
 
-  const handleSortOrderChange = (value: string | string[]) => {
-    setSortOrder(value);
-  };
-
-  const handleSearchQueryChange = (value: string) => {
-    setSearchQuery(value);
-  };
-
-  const filteredDirs = dirs.filter((dir) =>
-    dir.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredPhotoPaths = photoPaths.filter((path) =>
+    path.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const sortedDirs = filteredDirs.sort((a, b) => {
+  const sortedPhotoPaths = filteredPhotoPaths.sort((a, b) => {
     if (sortField === "VagonNumber") {
       return sortOrder === "asc" ? a.localeCompare(b) : b.localeCompare(a);
     } else {
@@ -37,7 +26,7 @@ const Photos: FC<IPhoto> = ({ dirs }) => {
     }
   });
 
-  const visibleDirs = sortedDirs.slice(0, currentPage * itemsPerPage);
+  const visibleDirs = sortedPhotoPaths.slice(0, currentPage * itemsPerPage);
 
   const handleLoadMore = () => {
     setCurrentPage(currentPage + 1);
@@ -48,22 +37,22 @@ const Photos: FC<IPhoto> = ({ dirs }) => {
       <Flex justifyContent="center" alignItems="center" mt={4}>
         <PhotoSearch
           searchQuery={searchQuery}
-          onSearchQueryChange={handleSearchQueryChange}
+          onSearchQueryChange={setSearchQuery}
         />
-        <Box ml={4} />
+        <Box ml={4}/>
         <PhotoSort
           sortField={sortField}
           sortOrder={sortOrder}
-          onSortFieldChange={handleSortFieldChange}
-          onSortOrderChange={handleSortOrderChange}
+          onSortFieldChange={setSortField}
+          onSortOrderChange={setSortOrder}
         />
       </Flex>
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} spacing={4} px={4} py={4}>
+      <SimpleGrid columns={{sm: 1, md: 2, lg: 3, xl: 5}} spacing={4} px={4} py={4}>
         {visibleDirs.map((dir) => (
-            <PhotoItem key={dir} dirs={dir} />
+          <PhotoItem key={dir} photoPath={dir}/>
         ))}
       </SimpleGrid>
-      {filteredDirs.length > currentPage * itemsPerPage && (
+      {filteredPhotoPaths.length > currentPage * itemsPerPage && (
         <Flex justifyContent="center" mb={4}>
           <Button onClick={handleLoadMore}>Show more</Button>
         </Flex>

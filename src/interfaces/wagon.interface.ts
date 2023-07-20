@@ -33,5 +33,5 @@ export interface IWagonData {
 }
 
 export interface IWagonDataSingle {
-  Vagons: IWagon;
+  Wagon: IWagon;
 }

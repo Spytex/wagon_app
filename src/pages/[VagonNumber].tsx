@@ -1,24 +1,23 @@
-import { FC } from 'react';
-import { GetServerSideProps, NextPage } from 'next';
+import {FC} from 'react';
+import {GetServerSideProps, NextPage} from 'next';
 import {IWagonDataSingle} from '@/interfaces/wagon.interface';
-import { WagonService } from '@/service/wagon.service';
-import Wagon from "@/components/screens/wagon/Wagon";
+import {WagonService} from '@/service/wagon.service';
+import WagonSingle from "@/components/screens/wagon/WagonSingle";
 
-const WagonPage: FC<IWagonDataSingle> = ({ Vagons }) => {
-  return <Wagon Vagons={Vagons} />;
+const WagonPage: FC<IWagonDataSingle> = ({Wagon}) => {
+  return <WagonSingle Wagon={Wagon}/>;
 };
 
 export const getServerSideProps: GetServerSideProps<IWagonDataSingle> = async (context) => {
-  const { VagonNumber } = context.query;
+  const {VagonNumber} = context.query;
 
   try {
-    const allWagons = await WagonService.getAll();
-    const Vagons = allWagons.Vagons.find((Vagons) => Vagons.VagonNumber === VagonNumber);
+    const Wagon = await WagonService.getOne(VagonNumber as string);
 
-    if (Vagons) {
+    if (Wagon) {
       return {
         props: {
-          Vagons,
+          Wagon,
         },
       };
     } else {

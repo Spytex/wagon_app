@@ -1,14 +1,14 @@
 import Home from "@/components/screens/home/Home";
-import { GetServerSideProps, NextPage } from "next";
-import { IWagon } from "@/interfaces/wagon.interface";
-import { WagonService } from "@/service/wagon.service";
+import {GetServerSideProps, NextPage} from "next";
+import {IWagonData} from "@/interfaces/wagon.interface";
+import {WagonService} from "@/service/wagon.service";
 
-const HomePage: NextPage<{ Vagons: IWagon[] }> = ({ Vagons }) => {
-  return <Home Vagons={Vagons} />;
+const HomePage: NextPage<IWagonData> = ({Vagons}) => {
+  return <Home Vagons={Vagons}/>;
 };
 
-export const getServerSideProps: GetServerSideProps<{ Vagons: IWagon[] }> = async () => {
-  const { Vagons } = await WagonService.getAll();
+export const getServerSideProps: GetServerSideProps<IWagonData> = async () => {
+  const {Vagons} = await WagonService.getAll();
 
   return {
     props: {

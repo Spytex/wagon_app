@@ -4,19 +4,19 @@ import fs from "fs/promises";
 import path from "path";
 import {IPhoto} from "@/interfaces/photo.interface";
 
-const PhotosPage: NextPage<IPhoto> = ({ dirs}) => {
-  return <Photos dirs={dirs}/>
+const PhotosPage: NextPage<IPhoto> = ({photoPaths}) => {
+  return <Photos photoPaths={photoPaths}/>
 }
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const props = { dirs: [] };
+  const props = {photoPaths: []};
   try {
-    const dirs = await fs.readdir(path.join(process.cwd(), "/public/photos"));
-    props.dirs = dirs as any;
-    return { props };
+    const photoPaths = await fs.readdir(path.join(process.cwd(), "/public/photos"));
+    props.photoPaths = photoPaths as any;
+    return {props};
   } catch (error) {
-    return { props };
+    return {props};
   }
 };
 

@@ -1,11 +1,11 @@
-import { FC } from "react";
+import {FC} from "react";
 import {Box, Flex, IconButton, Image, Text} from "@chakra-ui/react";
-import { IPhotoSingle } from "@/interfaces/photo.interface";
-import { PhotoService } from "@/service/photo.service";
-import { DeleteIcon } from "@chakra-ui/icons";
+import {IPhotoSingle} from "@/interfaces/photo.interface";
+import {PhotoService} from "@/service/photo.service";
+import {DeleteIcon} from "@chakra-ui/icons";
 
-export const PhotoItem: FC<IPhotoSingle> = ({ dirs }) => {
-  const fileName = dirs.split(".")[0];
+export const PhotoItem: FC<IPhotoSingle> = ({photoPath}) => {
+  const fileName = photoPath.split(".")[0];
 
   const handleFileDelete = async () => {
     try {
@@ -18,14 +18,14 @@ export const PhotoItem: FC<IPhotoSingle> = ({ dirs }) => {
   };
 
   return (
-    <Box key={dirs} borderWidth={1} p={4} borderRadius="md">
+    <Box key={photoPath} borderWidth={1} p={4} borderRadius="md">
       <Flex direction="column" align="center">
-        <Image src={"/photos/" + dirs} alt={fileName} maxW="200px" maxH="200px" />
+        <Image src={"/photos/" + photoPath} alt={fileName} maxW="200px" maxH="200px"/>
         <Text>{fileName}</Text>
         <IconButton
-            onClick={handleFileDelete}
-            icon={<DeleteIcon />}
-            aria-label="Delete">
+          onClick={handleFileDelete}
+          icon={<DeleteIcon/>}
+          aria-label="Delete">
         </IconButton>
       </Flex>
     </Box>

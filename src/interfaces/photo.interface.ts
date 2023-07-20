@@ -1,7 +1,7 @@
 export interface IPhoto {
-  dirs: string[];
+  photoPaths: string[];
 }
 
 export interface IPhotoSingle{
-  dirs: string;
+  photoPath: string;
 }

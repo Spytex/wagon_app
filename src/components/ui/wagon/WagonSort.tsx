@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import {FC} from 'react';
 import {
   Button,
   Menu,
@@ -20,33 +20,26 @@ interface IWagonSort {
 }
 
 const WagonSort: FC<IWagonSort> = ({
-  sortField,
-  sortOrder,
-  onSortFieldChange,
-  onSortOrderChange,
-}) => {
-  const handleSortFieldChange = (value: string | string[]) => {
-    onSortFieldChange(value);
-  };
-
-  const handleSortOrderChange = (value: string | string[]) => {
-    onSortOrderChange(value);
-  };
+                                     sortField,
+                                     sortOrder,
+                                     onSortFieldChange,
+                                     onSortOrderChange,
+                                   }) => {
 
   return (
     <Menu closeOnSelect={false}>
       <MenuButton as={Button}>
         <Flex alignItems="center">
-          <Icon as={FaSort} />
+          <Icon as={FaSort}/>
         </Flex>
       </MenuButton>
       <MenuList minWidth='240px'>
-        <MenuOptionGroup defaultValue={sortField} title='Sort By' type='radio' onChange={handleSortFieldChange}>
-          <MenuItemOption value='VagonNumber'>VagonNumber</MenuItemOption>
-          <MenuItemOption value='DepartureStationName'>DepartureStationName</MenuItemOption>
+        <MenuOptionGroup defaultValue={sortField} title='Sort By' type='radio' onChange={onSortFieldChange}>
+          <MenuItemOption value='VagonNumber'>Wagon Number</MenuItemOption>
+          <MenuItemOption value='DepartureStationName'>Departure Station</MenuItemOption>
         </MenuOptionGroup>
-        <MenuDivider />
-        <MenuOptionGroup defaultValue={sortOrder} title='Order' type='radio' onChange={handleSortOrderChange}>
+        <MenuDivider/>
+        <MenuOptionGroup defaultValue={sortOrder} title='Order' type='radio' onChange={onSortOrderChange}>
           <MenuItemOption value='asc'>Ascending</MenuItemOption>
           <MenuItemOption value='desc'>Descending</MenuItemOption>
         </MenuOptionGroup>

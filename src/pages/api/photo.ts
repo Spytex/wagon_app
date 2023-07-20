@@ -1,4 +1,4 @@
-import { NextApiHandler, NextApiRequest } from "next";
+import {NextApiHandler, NextApiRequest} from "next";
 import formidable from "formidable";
 import path from "path";
 import fs from "fs/promises";
@@ -25,13 +25,13 @@ const readFile = (
   return new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
-      resolve({ fields, files });
+      resolve({fields, files});
     });
   });
 };
 
 const deleteFile = async (req: NextApiRequest) => {
-  const { VagonNumber } = req.query;
+  const {VagonNumber} = req.query;
   const filePath = path.join(process.cwd(), "public", "photos", `${VagonNumber}.jpg`);
   try {
     await fs.unlink(filePath);
@@ -59,7 +59,7 @@ const handler: NextApiHandler = async (req, res) => {
     await readFile(req, true);
     res.json({done: "ok"});
   } else {
-    res.status(405).json({ message: "Method not supported" });
+    res.status(405).json({message: "Method not supported"});
   }
 };
 
