@@ -13,7 +13,7 @@ const middlewares: Middlewares = {
 }
 
 
-const readFile = async (
+const readFile = (
   req: NextApiRequest,
   saveLocally?: boolean,
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
@@ -52,7 +52,7 @@ async function postPhoto(options: IMiddlewareOptions) {
   } catch (error) {
     await fs.mkdir(path.join(process.cwd() + "/public", "/photos"));
   }
-  await readFile(req, true);
+  readFile(req, true);
   res.json({ done: "ok" });
 }
 
@@ -66,7 +66,7 @@ async function deletePhoto(options: IMiddlewareOptions) {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const method = req.method as HttpMethod;
   if (!Object.keys(middlewares).includes(method)) {
-    res.setHeader('Allow', ['POST', 'GET', 'DELETE']);
+    res.setHeader('Allow', ['POST', 'DELETE']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
