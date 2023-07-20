@@ -9,15 +9,15 @@ import {
   VisuallyHidden,
   Image,
 } from '@chakra-ui/react';
-import {FaInstagram, FaTwitter, FaYoutube} from 'react-icons/fa';
-import {ReactNode} from 'react';
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { ReactNode } from 'react';
 import LogoTitle from "public/train_logo_title.png";
 
 const SocialButton = ({
-                        children,
-                        label,
-                        href,
-                      }: {
+  children,
+  label,
+  href,
+}: {
   children: ReactNode;
   label: string;
   href: string;
@@ -57,7 +57,7 @@ export default function Footer() {
         justify={'center'}
         align={'center'}>
         <Link href="/">
-          <Image src={LogoTitle.src} alt="logo" height="50px" objectFit="cover"/>
+          <Image src={LogoTitle.src} alt="logo" height="50px" objectFit="cover" />
         </Link>
         <Stack direction={'row'} spacing={6}>
           <Link href={'/'}>Home</Link>
@@ -74,20 +74,20 @@ export default function Footer() {
           as={Stack}
           maxW={'6xl'}
           py={4}
-          direction={{base: 'column', md: 'row'}}
+          direction={{ base: 'column', md: 'row' }}
           spacing={4}
-          justify={{base: 'center', md: 'space-between'}}
-          align={{base: 'center', md: 'center'}}>
+          justify={{ base: 'center', md: 'space-between' }}
+          align={{ base: 'center', md: 'center' }}>
           <Text>© 2023 Wagon. All rights reserved</Text>
           <Stack direction={'row'} spacing={6}>
             <SocialButton label={'Twitter'} href={'https://www.twitter.com/'}>
-              <FaTwitter/>
+              <FaTwitter />
             </SocialButton>
             <SocialButton label={'YouTube'} href={'https://www.youtube.com/'}>
-              <FaYoutube/>
+              <FaYoutube />
             </SocialButton>
             <SocialButton label={'Instagram'} href={'https://www.instagram.com/'}>
-              <FaInstagram/>
+              <FaInstagram />
             </SocialButton>
           </Stack>
         </Container>

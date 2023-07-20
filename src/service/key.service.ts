@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const KeyService = {
   async getApiKeys() {
-    const {data} = await axios.get('/api/keys');
+    const { data } = await axios.get('/api/keys');
     return data;
   },
 

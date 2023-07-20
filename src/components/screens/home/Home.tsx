@@ -1,12 +1,12 @@
-import {FC, useState} from 'react';
+import { FC, useState } from 'react';
 import Layout from '@/components/layout/Layout';
-import {IWagonData} from '@/interfaces/wagon.interface';
-import {WagonItem} from '@/components/ui/wagon/WagonItem';
-import {Box, Flex, SimpleGrid, Button} from '@chakra-ui/react';
+import { IWagonData } from '@/interfaces/wagon.interface';
+import { WagonItem } from '@/components/ui/wagon/WagonItem';
+import { Box, Flex, SimpleGrid, Button } from '@chakra-ui/react';
 import WagonSort from '@/components/ui/wagon/WagonSort';
 import WagonSearch from '@/components/ui/wagon/WagonSearch';
 
-const Home: FC<IWagonData> = ({Vagons}) => {
+const Home: FC<IWagonData> = ({ Vagons }) => {
   const [sortField, setSortField] = useState<string | string[]>('VagonNumber');
   const [sortOrder, setSortOrder] = useState<string | string[]>('asc');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -40,8 +40,8 @@ const Home: FC<IWagonData> = ({Vagons}) => {
   return (
     <Layout>
       <Flex justifyContent="center" alignItems="center" mt={4}>
-        <WagonSearch searchQuery={searchQuery} onSearchQueryChange={setSearchQuery}/>
-        <Box ml={4}/>
+        <WagonSearch searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
+        <Box ml={4} />
         <WagonSort
           sortField={sortField}
           sortOrder={sortOrder}
@@ -49,9 +49,9 @@ const Home: FC<IWagonData> = ({Vagons}) => {
           onSortOrderChange={setSortOrder}
         />
       </Flex>
-      <SimpleGrid columns={{sm: 1, md: 2, lg: 3, xl: 5}} spacing={4} px={4} py={4}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} spacing={4} px={4} py={4}>
         {visibleWagons.map(wagon => (
-          <WagonItem key={wagon.VagonNumber} Wagon={wagon}/>
+          <WagonItem key={wagon.VagonNumber} Wagon={wagon} />
         ))}
       </SimpleGrid>
       {filteredWagons.length > currentPage * itemsPerPage && (

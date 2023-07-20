@@ -1,12 +1,12 @@
-import {FC, useState} from "react";
+import { FC, useState } from "react";
 import Layout from "@/components/layout/Layout";
-import {IPhoto} from "@/interfaces/photo.interface";
-import {SimpleGrid, Button, Flex, Box} from "@chakra-ui/react";
-import {PhotoItem} from "@/components/ui/photo/PhotoItem";
+import { IPhoto } from "@/interfaces/photo.interface";
+import { SimpleGrid, Button, Flex, Box } from "@chakra-ui/react";
+import { PhotoItem } from "@/components/ui/photo/PhotoItem";
 import PhotoSort from "@/components/ui/photo/PhotoSort";
 import PhotoSearch from "@/components/ui/wagon/WagonSearch";
 
-const Photos: FC<IPhoto> = ({photoPaths}) => {
+const Photos: FC<IPhoto> = ({ photoPaths }) => {
   const [sortField, setSortField] = useState<string | string[]>('VagonNumber');
   const [sortOrder, setSortOrder] = useState<string | string[]>('asc');
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -39,7 +39,7 @@ const Photos: FC<IPhoto> = ({photoPaths}) => {
           searchQuery={searchQuery}
           onSearchQueryChange={setSearchQuery}
         />
-        <Box ml={4}/>
+        <Box ml={4} />
         <PhotoSort
           sortField={sortField}
           sortOrder={sortOrder}
@@ -47,9 +47,9 @@ const Photos: FC<IPhoto> = ({photoPaths}) => {
           onSortOrderChange={setSortOrder}
         />
       </Flex>
-      <SimpleGrid columns={{sm: 1, md: 2, lg: 3, xl: 5}} spacing={4} px={4} py={4}>
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 5 }} spacing={4} px={4} py={4}>
         {visibleDirs.map((dir) => (
-          <PhotoItem key={dir} photoPath={dir}/>
+          <PhotoItem key={dir} photoPath={dir} />
         ))}
       </SimpleGrid>
       {filteredPhotoPaths.length > currentPage * itemsPerPage && (

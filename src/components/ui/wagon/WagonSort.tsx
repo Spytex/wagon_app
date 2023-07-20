@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import {
   Button,
   Menu,
@@ -10,7 +10,7 @@ import {
   Icon,
   Flex
 } from '@chakra-ui/react';
-import {FaSort} from "react-icons/fa";
+import { FaSort } from "react-icons/fa";
 
 interface IWagonSort {
   sortField: string | string[];
@@ -20,17 +20,17 @@ interface IWagonSort {
 }
 
 const WagonSort: FC<IWagonSort> = ({
-                                     sortField,
-                                     sortOrder,
-                                     onSortFieldChange,
-                                     onSortOrderChange,
-                                   }) => {
+  sortField,
+  sortOrder,
+  onSortFieldChange,
+  onSortOrderChange,
+}) => {
 
   return (
     <Menu closeOnSelect={false}>
       <MenuButton as={Button}>
         <Flex alignItems="center">
-          <Icon as={FaSort}/>
+          <Icon as={FaSort} />
         </Flex>
       </MenuButton>
       <MenuList minWidth='240px'>
@@ -38,7 +38,7 @@ const WagonSort: FC<IWagonSort> = ({
           <MenuItemOption value='VagonNumber'>Wagon Number</MenuItemOption>
           <MenuItemOption value='DepartureStationName'>Departure Station</MenuItemOption>
         </MenuOptionGroup>
-        <MenuDivider/>
+        <MenuDivider />
         <MenuOptionGroup defaultValue={sortOrder} title='Order' type='radio' onChange={onSortOrderChange}>
           <MenuItemOption value='asc'>Ascending</MenuItemOption>
           <MenuItemOption value='desc'>Descending</MenuItemOption>

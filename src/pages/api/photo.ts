@@ -1,4 +1,4 @@
-import {NextApiHandler, NextApiRequest} from "next";
+import { NextApiHandler, NextApiRequest } from "next";
 import formidable from "formidable";
 import path from "path";
 import fs from "fs/promises";
@@ -25,13 +25,13 @@ const readFile = (
   return new Promise((resolve, reject) => {
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
-      resolve({fields, files});
+      resolve({ fields, files });
     });
   });
 };
 
 const deleteFile = async (req: NextApiRequest) => {
-  const {VagonNumber} = req.query;
+  const { VagonNumber } = req.query;
   const filePath = path.join(process.cwd(), "public", "photos", `${VagonNumber}.jpg`);
   try {
     await fs.unlink(filePath);
@@ -41,14 +41,14 @@ const deleteFile = async (req: NextApiRequest) => {
 };
 
 const handler: NextApiHandler = async (req, res) => {
-  const {method} = req;
+  const { method } = req;
 
   if (method === "DELETE") {
     try {
       await deleteFile(req);
-      res.status(200).json({message: "File deleted successfully"});
+      res.status(200).json({ message: "File deleted successfully" });
     } catch (error) {
-      res.status(500).json({message: error});
+      res.status(500).json({ message: error });
     }
   } else if (method === "POST") {
     try {
@@ -57,9 +57,9 @@ const handler: NextApiHandler = async (req, res) => {
       await fs.mkdir(path.join(process.cwd() + "/public", "/photos"));
     }
     await readFile(req, true);
-    res.json({done: "ok"});
+    res.json({ done: "ok" });
   } else {
-    res.status(405).json({message: "Method not supported"});
+    res.status(405).json({ message: "Method not supported" });
   }
 };
 

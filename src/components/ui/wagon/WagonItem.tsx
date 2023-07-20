@@ -1,11 +1,11 @@
-import {FC, useRef, useState} from "react";
-import {IWagonDataSingle} from "@/interfaces/wagon.interface";
-import {Box, Button, Center, Flex, Link, Text, useToast, VStack} from "@chakra-ui/react";
-import {PhotoService} from "@/service/photo.service";
+import { FC, useRef, useState } from "react";
+import { IWagonDataSingle } from "@/interfaces/wagon.interface";
+import { Box, Button, Center, Flex, Link, Text, useToast, VStack } from "@chakra-ui/react";
+import { PhotoService } from "@/service/photo.service";
 import QRCode from "qrcode.react";
 import Barcode from "react-barcode";
 
-export const WagonItem: FC<IWagonDataSingle> = ({Wagon}) => {
+export const WagonItem: FC<IWagonDataSingle> = ({ Wagon }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
   const [showQRCode, setShowQRCode] = useState(false);
@@ -92,15 +92,15 @@ export const WagonItem: FC<IWagonDataSingle> = ({Wagon}) => {
       </Flex>
       {showQRCode && (
         <Center mt={4}>
-          <QRCode value={Wagon.VagonNumber}/>
+          <QRCode value={Wagon.VagonNumber} />
         </Center>
       )}
       {showBarcode && (
         <Center mt={4} textAlign="center">
-          <Barcode value={Wagon.VagonNumber.toString().padStart(12, "0")} format="EAN13"/>
+          <Barcode value={Wagon.VagonNumber.toString().padStart(12, "0")} format="EAN13" />
         </Center>
       )}
-      <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleFileUpload}/>
+      <input type="file" accept="image/*" ref={fileInputRef} hidden onChange={handleFileUpload} />
     </Box>
   );
 };

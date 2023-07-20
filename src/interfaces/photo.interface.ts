@@ -2,6 +2,6 @@ export interface IPhoto {
   photoPaths: string[];
 }
 
-export interface IPhotoSingle{
+export interface IPhotoSingle {
   photoPath: string;
 }

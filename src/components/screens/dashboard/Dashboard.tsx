@@ -1,8 +1,8 @@
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 import Layout from '@/components/layout/Layout';
-import {Box, Button, Center, Container, Divider, Flex, IconButton, Text, VStack} from '@chakra-ui/react';
-import {DeleteIcon} from '@chakra-ui/icons';
-import {KeyService} from "@/service/key.service";
+import { Box, Button, Center, Container, Divider, Flex, IconButton, Text, VStack } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
+import { KeyService } from "@/service/key.service";
 
 const Dashboard: FC = () => {
   const [apiKeys, setApiKeys] = useState<string[]>([]);
@@ -38,14 +38,14 @@ const Dashboard: FC = () => {
             <Center>
               <Button onClick={handleCreateApiKey}>Create API Key</Button>
             </Center>
-            <Divider orientation="horizontal" py={2}/>
+            <Divider orientation="horizontal" py={2} />
             <VStack py={4}>
               {apiKeys.map((apiKey, index) => (
                 <Box key={index} display="flex" alignItems="center">
                   <Text>{apiKey}</Text>
                   <IconButton
                     ml={2}
-                    icon={<DeleteIcon/>}
+                    icon={<DeleteIcon />}
                     aria-label="Delete"
                     onClick={() => handleDeleteApiKey(apiKey)}
                   ></IconButton>
