@@ -6,6 +6,12 @@ import { HttpMethod } from '@/enums/httpMethod.enum';
 import { IMiddlewareOptions } from '@/interfaces/middleware.interface';
 import { Middlewares } from '@/types/middleware.type';
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 
 const middlewares: Middlewares = {
   [HttpMethod.POST]: postPhoto,
@@ -13,7 +19,7 @@ const middlewares: Middlewares = {
 }
 
 
-const readFile = (
+const readFile = async (
   req: NextApiRequest,
   saveLocally?: boolean,
 ): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
@@ -52,7 +58,7 @@ async function postPhoto(options: IMiddlewareOptions) {
   } catch (error) {
     await fs.mkdir(path.join(process.cwd() + "/public", "/photos"));
   }
-  readFile(req, true);
+  await readFile(req, true);
   res.json({ done: "ok" });
 }
 

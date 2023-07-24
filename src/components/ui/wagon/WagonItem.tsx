@@ -27,8 +27,8 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Wagon }) => {
       try {
         const formData = new FormData();
         formData.append("myImage", file);
-        const response = await PhotoService.uploadPhoto(Wagon.VagonNumber, formData);
-        console.log("File uploaded:", response.data);
+        await PhotoService.uploadPhoto(Wagon.VagonNumber, formData);
+        console.log("File uploaded:", Wagon.VagonNumber);
         toast({
           position: "bottom-right",
           title: "File uploaded successfully.",
@@ -96,7 +96,7 @@ export const WagonItem: FC<IWagonDataSingle> = ({ Wagon }) => {
       </Flex>
       {showQRCode && (
         <Center mt={4}>
-          <QRCode value={Wagon.VagonNumber} bgColor={bgColor} fgColor={lineColor}/>
+          <QRCode value={Wagon.VagonNumber} bgColor={bgColor} fgColor={lineColor} />
         </Center>
       )}
       {showBarcode && (
